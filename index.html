@@ -1,2 +1,135 @@
-<p>Hello </p>
-<p>demopage </p>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <!-- for img-src, we are allowing all the images from http:/https: and data: only as other URI schemes-,
+             1. Filesystem: is not being used.
+             2. Mediastream is no longer supported by browser.
+             3. Blob URL is temporary URL that only exist for original page's lifetime and hence not valid for reading view -->
+    <!--
+         for default-src, add the url for translation because if they are not added the translation feature would not be available on iOS.
+    -->
+    <meta http-equiv="Content-Security-Policy"
+        content="
+          frame-src https://youtube.com https://www.youtube.com;
+          default-src https://*.microsoft.com https://api.cognitive.microsofttranslator.com;
+          img-src * data:;
+          form-action 'none';
+          style-src 'nonce-083d984e-6d41-40a4-b49d-cfb7e26202e9';
+          base-uri 'none'
+          "
+    >
+    <meta property="csp-nonce" content="083d984e-6d41-40a4-b49d-cfb7e26202e9">
+    <!-- place holder for css -->
+    <style nonce="083d984e-6d41-40a4-b49d-cfb7e26202e9">
+        :root {
+--sepia-color:#F9F5E9;
+--sepia_default-link-color:#0072C9;
+--sepia_active-link-color:#097DD5;
+--light-color:#FCFCFC;
+--light_default-link-color:#0075CF;
+--light_active-link-color:#0D7FD6;
+--light-yellow-color:#eceb8b;
+--light-yellow_default-link-color:#0069B9;
+--light-yellow_active-link-color:#0075CF;
+--lime-color:#b8d686;
+--lime_default-link-color:#005699;
+--lime_active-link-color:#0063AE;
+--light-green-color:#a5da90;
+--light-green_default-link-color:#005699;
+--light-green_active-link-color:#0063AE;
+--light-teal-color:#94e2be;
+--light-teal_default-link-color:#005CA3;
+--light-teal_active-link-color:#0069B9;
+--turquoise-color:#89e1dd;
+--turquoise_default-link-color:#005CA3;
+--turquoise_active-link-color:#0069B9;
+--teal-color:#8ed5de;
+--teal_default-link-color:#005699;
+--teal_active-link-color:#0063AE;
+--sky-blue-color:#a3cfe4;
+--sky-blue_default-link-color:#005699;
+--sky-blue_active-link-color:#0063AE;
+--light-blue-color:#b3caec;
+--light-blue_default-link-color:#005699;
+--light-blue_active-link-color:#0063AE;
+--lavender-color:#d1bfeb;
+--lavender_default-link-color:#005393;
+--lavender_active-link-color:#0060A9;
+--orchid-color:#edb5f3;
+--orchid_default-link-color:#005393;
+--orchid_active-link-color:#0060A9;
+--grey-color:#E6E6E6;
+--grey_default-link-color:#0069B9;
+--grey_active-link-color:#0075CF;
+--pink-color:#f6b6d9;
+--pink_default-link-color:#005699;
+--pink_active-link-color:#0063AE;
+--carnation-color:#fdacc3;
+--carnation_default-link-color:#00508E;
+--carnation_active-link-color:#005CA3;
+--dark-grey-color:#242424;
+--dark-grey_default-link-color:#3091DC;
+--dark-grey_active-link-color:#1E88D9;
+--black-color:#000000;
+--black_default-link-color:#0078D4;
+--black_active-link-color:#006CBE;
+--green-color:#91ffa6;
+--green_default-link-color:#0069B9;
+--green_active-link-color:#0075CF;
+--blue-color:#87faff;
+--blue_default-link-color:#0069B9;
+--blue_active-link-color:#0075CF;
+--yellow-color:#feff5c;
+--yellow_default-link-color:#0072C9;
+--yellow_active-link-color:#097DD5;
+--rose-color:#febaba;
+--rose_default-link-color:#005699;
+--rose_active-link-color:#0063AE;
+--apricot-color:#f1bfa9;
+--apricot_default-link-color:#005699;
+--apricot_active-link-color:#0063AE;
+--light-orange-color:#f0d592;
+--light-orange_default-link-color:#0060A9;
+--light-orange_active-link-color:#006CBE;
+}
+ body {
+            background-color: var(--sepia-color),
+            transition: "background .5s cubic-bezier(0.25,0.10,0.25,1.00)"
+        }
+    </style>
+
+    <title id="title">Immersive Reader</title>
+    <base id="content_base" target="_top" />
+</head>
+
+<body>
+    <!-- the class name notranslate has to be in sync with MsNoTranslateClass variable from /src/scripts/TranslatorConstants.ts -->
+    <div class="notranslate noPrint" id="reading-bar-container"></div>
+    <div class="notranslate" id="modal-root"></div>
+    <div id="full_page_progress_container" class="contentBody">
+        <!-- <progress class="progress_pages_pending full_page_progress_indicator" /> -->
+    </div>
+    <div class="__reading__mode__screen_reader_only" id="__reading__mode__screen_reader_info" aria-live="assertive" aria-atomic="true" hidden></div>
+    <!-- Main container containing extracted content -->
+    <div id="main_container" class="regionScrollContainer noPrint">
+      <div id="__reading__mode__toc__root__container__id"></div>
+      <div id="lineFocusContainer" hidden="true" role="navigation">
+          <div id="lineFocusTopOverlayContainer"></div>
+          <div id="lineFocusView"></div>
+          <div id="lineFocusViewAnimationOverlay"></div>
+          <div id="lineFocusBottomOverlayContainer">
+              <div id="lineFocusArrowButtonsContainer"></div>
+          </div>
+      </div>
+      <div class="multicolview noPrint" id="regionContainer">
+      </div>
+    </div>
+    <div id="pictureDictionaryPopup"></div>
+    <div id="print_container" class="forPrint">
+    </div>
+</body>
+
+</html>
