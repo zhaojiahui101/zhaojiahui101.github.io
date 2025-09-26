@@ -133,10 +133,10 @@ AudioIM produces audio with higher style similarity to the prompt and achieves s
             <thead>
                 <tr>
                     <th class="align-middle" style="min-width: 150px;">Prompt</th>
-                    <th class="align-middle">Ground Truth</th>
+                    <th class="align-middle" style="width: 150px;">Ground Truth</th>
                     <th class="align-middle" style="width: 100px;">MMAudio(Vanilla)</th>
-                    <th class="align-middle">MMAudio w/ Prompt Masking</th>
-                    <th class="align-middle">AudioIM w/o Style Enc</th>
+                    <th class="align-middle" style="width: 300px;">MMAudio w/ Prompt Masking</th>
+                    <th class="align-middle" style="width: 200px;">AudioIM w/o Style Enc</th>
                     <th class="align-middle">AudioIM</th>
                 </tr>
             </thead>
@@ -144,47 +144,34 @@ AudioIM produces audio with higher style similarity to the prompt and achieves s
                 <!-- 第一组样本 -->
                 <tr>
                     <td style="vertical-align: middle; text-align: center;">
-						<video controls style="width:100px;">
-                            <source src="wav/ref_spk/0013_000046.wav" type="audio/wav">
+						<video controls style="width:200px;">
+                            <source src="video/ref/bu-zB_kmBao_000043.mp4" type="video/mp4">
                         </video>
 					</td>
                     <td style="vertical-align: middle; text-align: center;">
-                        <div style="width:100px; word-wrap: break-word;">Angry→Surprise→Neutral</div>
-                        <audio controls style="width:100px;">
-                            
-                          <source src="wav/ref_wav/en_0.wav" type="audio/wav">
-                        </audio>
+                        <video controls style="width:200px;">
+                            <source src="video/gt/bu-zB_kmBao_000043.mp4" type="video/mp4">
+                        </video>
                     </td>
-                    <td style="vertical-align: middle; text-align: center;"><b>Moderate</b>→<b>Slightly Slow</b>→<b>Slightly Fast</b></td>
                     <td style="vertical-align: middle; text-align: center;">
-                        <audio controls style="width:100px;">
-                            <source src="wav/ref_spk/0013_000046.wav" type="audio/wav">
-                        </audio>
+						<video controls style="width:200px;">
+                            <source src="video/MMAudio(Vanilla)/bu-zB_kmBao_000043.mp4" type="video/mp4">
+                        </video>
+					</td>
+                    <td style="vertical-align: middle; text-align: center;">
+                        <video controls style="width:200px;">
+                            <source src="video/MMAudio_PM/bu-zB_kmBao_000043.mp4" type="video/mp4">
+                        </video>
                     </td>
                     <td style="vertical-align: middle; text-align: center;">                        
-                        <audio controls style="width:100px;">
-                            <source src="wav1/Index-TTS/en_0_2.wav" type="audio/wav">
-                        </audio>
+                        <video controls style="width:200px;">
+                            <source src="video/AudioIM_wo_StyleEnc/bu-zB_kmBao_000043.mp4" type="video/mp4">
+                        </video>
                     </td>
                     <td style="vertical-align: middle; text-align: center;">
-                        <audio controls style="width:100px;">
-                            <source src="wav1/Spark-TTS/en_0_2.wav" type="audio/wav">
-                        </audio>
-                    </td>
-                    <td style="vertical-align: middle; text-align: center;">
-                        <audio controls style="width:100px;">
-                            <source src="wav1/F5-TTS/en_0_2.wav" type="audio/wav">
-                        </audio>
-                    </td>
-                    <td style="vertical-align: middle; text-align: center;">
-                        <audio controls style="width:100px;">
-                            <source src="wav1/CosyVoice2/en_0_2.wav" type="audio/wav">
-                        </audio>
-                    </td>
-                    <td style="vertical-align: middle; text-align: center;">
-                        <audio controls style="width:100px;">
-                            <source src="wav1/Ours/en_0_2.wav" type="audio/wav">
-                        </audio>
+                        <video controls style="width:200px;">
+                            <source src="video/AudioIM/bu-zB_kmBao_000043.mp4" type="video/mp4">
+                        </video>
                     </td>
                 </tr>
 
