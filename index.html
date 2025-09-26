@@ -115,26 +115,13 @@ AudioIM produces audio with higher style similarity to the prompt and achieves s
         <br><br>
         <p style="font-style: italic; margin-top: 8px;">
             <b>Figure 1.</b> 
-            Overview of AudioIM. The 1st-stage teacher extends a zero-shot TTS model with dynamic speed control, transition smoothing, and multi-round inference to enable word-level emotion and speaking rate control. In the 2nd stage, it supervises a student model with a dynamic emotion attention bias (DEAB) to achieve the same control in an end-to-end manner with reduced inference complexity.
+            Overview of AudioIM. The training mask and the style encoder of the proposed method. Through mask training, the model is enabled to leverage prompt audio latents to provide fine-grained stylistic information for audio generation. We separately extract timbre and prosody features from the prompt audio by two encoders, and subsequently fuse them and inject fused feature into the model through conditioning.
         </p>
 
     </div>
     
     <br><br>
     
-    <!-- 第二行：两张图并排显示 -->
-    <div style="display: flex; justify-content: center; gap: 20px;">
-        <div style="text-align: center; width: 47%;">
-            <img id="teaser" style="width: 100%;" src="imgs/first.png">  
-            <p style="font-style: italic; margin-top: 8px;">
-                <b>Figure 2.</b> Word-level emotion and speaking rate control using a transition-smoothing module and dynamic speed adjustment. At each inference round, an emotional prompt is used to generate a speech segment, with the tail of the previous output appended to ensure continuity. Speaking rate is controlled by interpolating or downsampling prompt speech tokens. The final utterance is produced by concatenating all segments and decoding them through flow matching and a vocoder.            </p>
-        </div>
-        <div style="text-align: center; width: 47%;">
-            <img id="teaser" style="width: 100%; background: white" src="imgs/second.png">    
-            <p style="font-style: italic; margin-top: 8px;">
-                <b>Figure 3.</b> The proposed self-training strategy. A teacher model under a complex multi-round inference manner supervises a student TTS model to enable word-level emotion and speaking rate control. The dynamic emotional attention bias mechanism further enhances expressive generation in a simplified end-to-end single-pass inference manner.            </p>
-        </div>
-    </div>
 </div>
 
 
