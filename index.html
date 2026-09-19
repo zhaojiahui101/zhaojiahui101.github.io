@@ -53,7 +53,7 @@
 <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
     <div class="column has-text-centered">
     <!-- <h1 class="title is-1 publication-title"> <b>AudioIM:</b>  </h1> -->
-    <h3 class="title is-2 publication-title"> <b>Audio Imitator: Controlling Timbre and Prosody in Video2Audio Synthesis with Audio Reference</b></h3>
+    <h3 class="title is-2 publication-title"> <b>Audio Imitator: Controlling Timbre and Tempo in Video2Audio Synthesis with Audio Reference</b></h3>
     </div>
     <br>
     <!-- authors -->
@@ -103,9 +103,9 @@
         </div>
     </div>
     <p style="font-size: 18px;">
-        Video-to-audio (V2A) generation has recently attracted increasing attention, particularly in achieving semantic consistency and temporal alignment. Existing works have demonstrated promising progress in this direction, but they generally condition only on visual/text content and provide little control over timbre and prosody. Timbre refers to voiceprint-like characteristics, while prosody refers to the rhythm and temporal dynamics.
-We introduce AudioIM, a promptable video-to-audio generator built on the MMAudio backbone with two key extensions: (i) a temporal-masking strategy during training that enables the model to leverage an audio prompt, and (ii) dual style encoders that inject prompt-derived features into both global and frame-level conditioning, thereby allowing fine-grained control of timbre and prosody.
-AudioIM produces audio with higher style similarity to the prompt and achieves strong performance on core video-to-audio tasks, while preserving semantic and temporal alignment. 
+        Video-to-audio generation has made significant progress in achieving semantic consistency and temporal alignment from silent videos. However, audio contains rich stylistic attributes such as timbre and tempo that are difficult to infer from visual and textual inputs alone. 
+While reference audio can serve as additional conditioning, it is typically treated as a holistic signal, limiting fine-grained style control. We propose AudioIM, an attribute-aware framework that explicitly models timbre and tempo as separate control factors rather than relying on holistic prompt conditioning. 
+Dual encoders extract complementary timbre-related and tempo-related representations, which are injected through global conditioning. A masking-based training strategy enables effective latent prompt conditioning at inference.
     </p>
     <br>
     <br>
@@ -115,7 +115,10 @@ AudioIM produces audio with higher style similarity to the prompt and achieves s
         <br><br>
         <p style="font-style: italic; margin-top: 8px;">
             <b>Figure 1.</b> 
-            Overview of AudioIM. The training mask and the style encoder of the proposed method. Through mask training, the model is enabled to leverage prompt audio latents to provide fine-grained stylistic information for audio generation. We separately extract timbre and prosody features from the prompt audio by two encoders, and subsequently fuse them and inject fused feature into the model through conditioning.
+            Overview of the proposed AudioIM framework. 
+			During training, audio latents are partially masked to enable latent-level prompt conditioning under a flow-matching objective. 
+			Reference audio is processed by dual style encoders to extract complementary timbre-related and tempo-related representations. 
+			These style features are fused and injected through global conditioning pathways, enabling attribute-aware video-to-audio generation while preserving semantic and temporal alignment.
         </p>
 
     </div>
@@ -127,7 +130,7 @@ AudioIM produces audio with higher style similarity to the prompt and achieves s
 
 <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
     <h3>Style Similarity between Generated and Prompt Audios</h3>
-    <h6>Current video-to-audio works generally condition only on visual/text content and provide little control over timbre and prosody. AudioIM produces audio with higher style similarity to the prompt and achieves strong performance on core video-to-audio tasks.</h6>
+    <h6>Current video-to-audio works generally condition only on visual/text content and provide little control over timbre and tempo. AudioIM produces audio with higher style similarity to the prompt and achieves strong performance on core video-to-audio tasks.</h6>
     <div class="table-responsive pt-3">
         <table class="table table-hover pt-2 text-center" style="width: 100%; table-layout: fixed;">
             <thead>
